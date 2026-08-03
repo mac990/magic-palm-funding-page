@@ -288,12 +288,23 @@
       color: #fff;
     }
 
-    .hero-video {
-      position: absolute;
-      inset: 0;
-      z-index: 1;
-      overflow: hidden;
-    }
+.hero-video {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  overflow: hidden;
+  background: #050505;
+}
+
+.hero-video video,
+.hero-video iframe {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border: 0;
+  display: block;
+}
+
 
     .hero-video video,
     .hero-video iframe {
@@ -1186,86 +1197,63 @@
 
   <main>
     <!-- 01 Fullscreen Hero Video -->
-    <section class="hero-fullscreen">
-      <div class="hero-video">
-        <!-- 
-          第一屏全屏影片｜MP4 版本
-          取消註解後替換：
-          REPLACE_VIDEO_URL_HERO
-          REPLACE_IMAGE_URL_HERO_POSTER
-        -->
-        <!--
-        <video autoplay muted loop playsinline poster="REPLACE_IMAGE_URL_HERO_POSTER">
-          <source src="https://cdn.shopify.com/videos/c/o/v/7dd11f17aa374c8e8709859a288669a8.mp4" />
-        </video>
-        -->
+<section class="hero-fullscreen">
+  <div class="hero-video">
+    <video autoplay muted loop playsinline preload="auto">
+      <source src="https://cdn.shopify.com/videos/c/o/v/7dd11f17aa374c8e8709859a288669a8.mp4" type="video/mp4" />
+    </video>
+  </div>
 
-        <!-- 
-          第一屏全屏影片｜YouTube / Vimeo iframe 版本
-          取消註解後替換：
-          REPLACE_YOUTUBE_EMBED_URL_HERO
-        -->
-        <!--
-        <iframe
-          src="REPLACE_YOUTUBE_EMBED_URL_HERO"
-          title="Magic Palm Hero Video"
-          allow="autoplay; fullscreen; picture-in-picture"
-          allowfullscreen>
-        </iframe>
-        -->
+  <div class="hero-gradient"></div>
 
-        <div class="hero-poster"></div>
-      </div>
+  <div class="hero-content">
+    <div class="hero-inner">
+      <div class="hero-copy">
+        <div class="eyebrow">Audio Smart Glasses</div>
+        <h1>不用耳機，<br />聲音也能在耳邊。</h1>
+        <p class="lead">
+          Magic Palm 聲音型智慧眼鏡，把音樂、通話與語音提醒自然融入日常配戴。
+        </p>
 
-      <div class="hero-gradient"></div>
+        <div class="hero-badges">
+          <span class="badge">開放聆聽</span>
+          <span class="badge">清晰通話</span>
+          <span class="badge">輕觸控制</span>
+          <span class="badge">生活 / 運動雙款</span>
+        </div>
 
-      <div class="hero-content">
-        <div class="hero-inner">
-          <div class="hero-copy">
-            <div class="eyebrow">Audio Smart Glasses</div>
-            <h1>不用耳機，<br />聲音也能在耳邊。</h1>
-            <p class="lead">
-              Magic Palm 聲音型智慧眼鏡，把音樂、通話與語音提醒自然融入日常配戴。
-            </p>
-
-            <div class="hero-badges">
-              <span class="badge">開放聆聽</span>
-              <span class="badge">清晰通話</span>
-              <span class="badge">輕觸控制</span>
-              <span class="badge">生活 / 運動雙款</span>
-            </div>
-
-            <div class="button-row">
-              <a href="#plans" class="btn primary">立即支持早鳥優惠</a>
-              <a href="#scenarios" class="btn secondary">查看使用情境</a>
-            </div>
-          </div>
-
-          <div class="funding-bar">
-            <div class="funding-kicker">嘖嘖募資進行中</div>
-            <div class="funding-meta">
-              <div>
-                <strong>72%</strong>
-                <span>目前達標進度</span>
-              </div>
-              <div>
-                <strong>386</strong>
-                <span>已支持人數</span>
-              </div>
-              <div>
-                <strong>21 天</strong>
-                <span>募資剩餘時間</span>
-              </div>
-            </div>
-            <div class="progress">
-              <span></span>
-            </div>
-          </div>
+        <div class="button-row">
+          <a href="#plans" class="btn primary">立即支持早鳥優惠</a>
+          <a href="#scenarios" class="btn secondary">查看使用情境</a>
         </div>
       </div>
 
-      <div class="scroll-hint">Scroll</div>
-    </section>
+      <div class="funding-bar">
+        <div class="funding-kicker">嘖嘖募資進行中</div>
+        <div class="funding-meta">
+          <div>
+            <strong>72%</strong>
+            <span>目前達標進度</span>
+          </div>
+          <div>
+            <strong>386</strong>
+            <span>已支持人數</span>
+          </div>
+          <div>
+            <strong>21 天</strong>
+            <span>募資剩餘時間</span>
+          </div>
+        </div>
+        <div class="progress">
+          <span></span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="scroll-hint">Scroll</div>
+</section>
+
 
     <!-- 02 Pain Points -->
     <section class="section" id="pain">
