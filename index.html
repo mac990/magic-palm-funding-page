@@ -1,1 +1,1858 @@
 
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Magic Palm｜聲音型智慧眼鏡募資計畫</title>
+
+  <style>
+    :root {
+      --black: #080808;
+      --ink: #111111;
+      --graphite: #2a2a2a;
+      --gray: #777777;
+      --soft-gray: #b8b8b0;
+      --mist: #f7f6f1;
+      --paper: #fbfaf6;
+      --white: #ffffff;
+      --line: rgba(20, 20, 20, 0.1);
+      --line-white: rgba(255, 255, 255, 0.14);
+      --gold: #c8a47f;
+      --gold-light: #e6cba8;
+      --blue: #9ebed8;
+      --blue-deep: #31475a;
+      --radius-xl: 42px;
+      --radius-lg: 32px;
+      --radius-md: 22px;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "PingFang TC", "Noto Sans TC", "Helvetica Neue", Arial, sans-serif;
+      background: var(--paper);
+      color: var(--ink);
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: -2;
+      background:
+        radial-gradient(circle at 10% 5%, rgba(158, 190, 216, 0.18), transparent 26%),
+        radial-gradient(circle at 90% 0%, rgba(200, 164, 127, 0.18), transparent 30%),
+        linear-gradient(180deg, #fbfaf6 0%, #f3f1eb 100%);
+    }
+
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      opacity: 0.04;
+      pointer-events: none;
+      background-image:
+        linear-gradient(rgba(0,0,0,0.8) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,0,0,0.8) 1px, transparent 1px);
+      background-size: 64px 64px;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img,
+    video,
+    iframe {
+      display: block;
+      max-width: 100%;
+    }
+
+    .nav {
+      position: fixed;
+      top: 18px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: min(1180px, calc(100% - 36px));
+      height: 64px;
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 18px 0 26px;
+      background: rgba(10, 10, 10, 0.42);
+      backdrop-filter: blur(28px);
+      border: 1px solid rgba(255,255,255,0.16);
+      border-radius: 999px;
+      color: #fff;
+      box-shadow: 0 24px 80px rgba(0,0,0,0.24);
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 17px;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+    }
+
+    .logo::before {
+      content: "";
+      width: 9px;
+      height: 9px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, var(--gold-light), var(--blue));
+      box-shadow: 0 0 24px rgba(200,164,127,0.8);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 26px;
+      color: rgba(255, 255, 255, 0.72);
+      font-size: 13px;
+    }
+
+    .nav-links a {
+      transition: 0.25s ease;
+    }
+
+    .nav-links a:hover {
+      color: #fff;
+    }
+
+    .nav-cta {
+      padding: 10px 19px;
+      border-radius: 999px;
+      background: #fff;
+      color: var(--black);
+      font-size: 13px;
+      font-weight: 500;
+    }
+
+    h1,
+    h2,
+    h3 {
+      font-weight: 300;
+      letter-spacing: -0.06em;
+      line-height: 1.06;
+    }
+
+    h1 {
+      font-size: clamp(58px, 9vw, 132px);
+    }
+
+    h2 {
+      font-size: clamp(42px, 6vw, 86px);
+    }
+
+    h3 {
+      font-size: clamp(28px, 3vw, 42px);
+    }
+
+    p {
+      color: var(--gray);
+      font-weight: 300;
+    }
+
+    .section {
+      padding: 132px 44px;
+      position: relative;
+    }
+
+    .container {
+      width: min(1180px, 100%);
+      margin: 0 auto;
+    }
+
+    .center {
+      text-align: center;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 12px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--gray);
+      margin-bottom: 22px;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 28px;
+      height: 1px;
+      background: currentColor;
+      opacity: 0.55;
+    }
+
+    .lead {
+      margin-top: 24px;
+      font-size: clamp(18px, 2vw, 22px);
+      line-height: 1.8;
+    }
+
+    .button-row {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-top: 38px;
+    }
+
+    .button-row.centered {
+      justify-content: center;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 48px;
+      padding: 13px 25px;
+      border-radius: 999px;
+      font-size: 14px;
+      transition: all 0.28s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.26), transparent);
+      transform: translateX(-120%);
+      transition: 0.55s ease;
+    }
+
+    .btn:hover::after {
+      transform: translateX(120%);
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+    }
+
+    .btn.primary {
+      background: #fff;
+      color: var(--black);
+    }
+
+    .btn.dark {
+      background: var(--black);
+      color: #fff;
+    }
+
+    .btn.secondary {
+      background: rgba(255, 255, 255, 0.12);
+      border: 1px solid rgba(255, 255, 255, 0.24);
+      color: #fff;
+      backdrop-filter: blur(18px);
+    }
+
+    .btn.light-secondary {
+      background: rgba(255, 255, 255, 0.68);
+      border: 1px solid var(--line);
+      color: var(--black);
+    }
+
+    /* =========================
+       Premium Fullscreen Hero
+    ========================== */
+    .hero-fullscreen {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      min-height: 820px;
+      overflow: hidden;
+      display: flex;
+      align-items: flex-end;
+      background: #050505;
+      color: #fff;
+    }
+
+    .hero-video {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      overflow: hidden;
+    }
+
+    .hero-video video,
+    .hero-video iframe {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border: 0;
+    }
+
+    .hero-video iframe {
+      transform: scale(1.18);
+      transform-origin: center;
+    }
+
+    .hero-poster {
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(180deg, rgba(0,0,0,0.1), rgba(0,0,0,0.85)),
+        url("REPLACE_IMAGE_URL_HERO_POSTER") center / cover no-repeat;
+    }
+
+    .hero-gradient {
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      pointer-events: none;
+      background:
+        radial-gradient(circle at 68% 28%, rgba(158, 190, 216, 0.24), transparent 32%),
+        radial-gradient(circle at 18% 78%, rgba(200, 164, 127, 0.16), transparent 30%),
+        linear-gradient(90deg, rgba(0,0,0,0.72) 0%, rgba(0,0,0,0.18) 48%, rgba(0,0,0,0.56) 100%),
+        linear-gradient(180deg, rgba(0,0,0,0.16) 0%, rgba(0,0,0,0.22) 46%, rgba(0,0,0,0.92) 100%);
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 3;
+      width: 100%;
+      padding: 0 44px 58px;
+    }
+
+    .hero-inner {
+      width: min(1180px, 100%);
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1.04fr 0.62fr;
+      gap: 54px;
+      align-items: end;
+    }
+
+    .hero-copy {
+      max-width: 840px;
+    }
+
+    .hero-copy .eyebrow {
+      color: rgba(255,255,255,0.72);
+    }
+
+    .hero-copy h1 {
+      text-wrap: balance;
+      text-shadow: 0 18px 70px rgba(0,0,0,0.55);
+    }
+
+    .hero-copy p {
+      color: rgba(255,255,255,0.74);
+      max-width: 620px;
+    }
+
+    .hero-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 30px;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 8px 13px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.11);
+      border: 1px solid rgba(255,255,255,0.2);
+      font-size: 13px;
+      color: rgba(255,255,255,0.86);
+      backdrop-filter: blur(16px);
+    }
+
+    .funding-bar {
+      padding: 26px;
+      border-radius: 30px;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.16), rgba(255,255,255,0.08));
+      border: 1px solid rgba(255,255,255,0.18);
+      backdrop-filter: blur(26px);
+      box-shadow: 0 32px 90px rgba(0,0,0,0.34);
+    }
+
+    .funding-kicker {
+      color: rgba(255,255,255,0.64);
+      font-size: 13px;
+      margin-bottom: 20px;
+    }
+
+    .funding-meta {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin-bottom: 20px;
+    }
+
+    .funding-meta strong {
+      display: block;
+      font-size: 28px;
+      font-weight: 400;
+      color: #fff;
+      letter-spacing: -0.04em;
+    }
+
+    .funding-meta span {
+      display: block;
+      font-size: 12px;
+      color: rgba(255,255,255,0.58);
+    }
+
+    .progress {
+      height: 8px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.16);
+      overflow: hidden;
+    }
+
+    .progress span {
+      display: block;
+      width: 72%;
+      height: 100%;
+      background: linear-gradient(90deg, var(--gold), var(--gold-light), var(--blue));
+      box-shadow: 0 0 22px rgba(200,164,127,0.45);
+    }
+
+    .scroll-hint {
+      position: absolute;
+      left: 50%;
+      bottom: 20px;
+      z-index: 4;
+      transform: translateX(-50%);
+      color: rgba(255,255,255,0.56);
+      font-size: 11px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+
+    .scroll-hint::after {
+      content: "";
+      display: block;
+      width: 1px;
+      height: 34px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.6), transparent);
+      margin: 10px auto 0;
+    }
+
+    /* =========================
+       Reusable Premium Cards
+    ========================== */
+    .card {
+      position: relative;
+      border-radius: var(--radius-lg);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.88), rgba(255,255,255,0.58));
+      border: 1px solid rgba(0,0,0,0.08);
+      padding: 36px;
+      overflow: hidden;
+      box-shadow: 0 24px 70px rgba(18,18,18,0.05);
+    }
+
+    .card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background:
+        radial-gradient(circle at 80% 0%, rgba(158,190,216,0.16), transparent 34%),
+        radial-gradient(circle at 0% 100%, rgba(200,164,127,0.12), transparent 32%);
+      opacity: 0;
+      transition: 0.35s ease;
+    }
+
+    .card:hover::before {
+      opacity: 1;
+    }
+
+    .card h3 {
+      margin-bottom: 16px;
+      position: relative;
+    }
+
+    .card p {
+      position: relative;
+    }
+
+    .image-card {
+      position: relative;
+      min-height: 280px;
+      border-radius: 26px;
+      overflow: hidden;
+      background: #e8e6df;
+      margin-bottom: 28px;
+    }
+
+    .image-card::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, transparent, rgba(0,0,0,0.18));
+      pointer-events: none;
+    }
+
+    .image-card img {
+      width: 100%;
+      height: 100%;
+      min-height: 280px;
+      object-fit: cover;
+      transition: 0.8s ease;
+    }
+
+    .card:hover .image-card img {
+      transform: scale(1.04);
+    }
+
+    .pain-grid,
+    .feature-grid,
+    .package-grid,
+    .faq-grid {
+      display: grid;
+      gap: 24px;
+    }
+
+    .pain-grid {
+      grid-template-columns: repeat(3, 1fr);
+      margin-top: 70px;
+    }
+
+    .intro {
+      background: linear-gradient(180deg, #fff, #f7f6f1);
+    }
+
+    .split {
+      display: grid;
+      grid-template-columns: 0.92fr 1.08fr;
+      gap: 64px;
+      align-items: center;
+    }
+
+    .visual-box {
+      min-height: 600px;
+      border-radius: var(--radius-xl);
+      background:
+        radial-gradient(circle at 55% 25%, rgba(158,190,216,0.26), transparent 34%),
+        linear-gradient(135deg, #ece9df, #ffffff);
+      overflow: hidden;
+      display: grid;
+      place-items: center;
+      color: var(--gray);
+      text-align: center;
+      padding: 30px;
+      box-shadow: inset 0 0 0 1px rgba(0,0,0,0.08), 0 30px 90px rgba(0,0,0,0.08);
+    }
+
+    .visual-box.dark {
+      background:
+        radial-gradient(circle at 62% 24%, rgba(158,190,216,0.22), transparent 34%),
+        linear-gradient(135deg, #2b2b2b, #050505);
+      color: rgba(255,255,255,0.6);
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,0.1), 0 35px 100px rgba(0,0,0,0.22);
+    }
+
+    .visual-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .feature-grid {
+      grid-template-columns: repeat(3, 1fr);
+      margin-top: 74px;
+    }
+
+    .feature-card {
+      min-height: 470px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      border: 1px solid rgba(0,0,0,0.1);
+      margin-bottom: 28px;
+      display: grid;
+      place-items: center;
+      color: var(--gold);
+      font-size: 20px;
+      background: rgba(255,255,255,0.6);
+    }
+
+    .tag-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 26px;
+      position: relative;
+    }
+
+    .tag {
+      padding: 8px 13px;
+      border-radius: 999px;
+      border: 1px solid rgba(0,0,0,0.08);
+      background: rgba(255,255,255,0.7);
+      color: var(--graphite);
+      font-size: 13px;
+    }
+
+    /* =========================
+       Editorial Scenarios
+    ========================== */
+    .scenario-list {
+      display: grid;
+      gap: 34px;
+      margin-top: 78px;
+    }
+
+    .scenario {
+      position: relative;
+      min-height: 680px;
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+      background: #111;
+      color: #fff;
+      box-shadow: 0 35px 110px rgba(0,0,0,0.16);
+    }
+
+    .scenario:nth-child(even) {
+      grid-template-columns: 0.85fr 1.15fr;
+    }
+
+    .scenario:nth-child(even) .scenario-media {
+      order: 2;
+    }
+
+    .scenario-media {
+      position: relative;
+      overflow: hidden;
+      background: #222;
+    }
+
+    .scenario-media::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at 70% 20%, rgba(158,190,216,0.18), transparent 34%),
+        linear-gradient(180deg, transparent 40%, rgba(0,0,0,0.5));
+    }
+
+    .scenario-media img,
+    .scenario-media video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: 1s ease;
+    }
+
+    .scenario:hover .scenario-media img {
+      transform: scale(1.035);
+    }
+
+    .scenario-copy {
+      padding: 70px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      background:
+        radial-gradient(circle at 0% 0%, rgba(200,164,127,0.14), transparent 34%),
+        linear-gradient(135deg, #181818, #070707);
+    }
+
+    .scenario-copy h3 {
+      font-size: clamp(40px, 5vw, 76px);
+      margin-bottom: 24px;
+    }
+
+    .scenario-copy p {
+      color: rgba(255,255,255,0.68);
+      font-size: 18px;
+    }
+
+    .scenario .tag {
+      color: rgba(255,255,255,0.82);
+      border-color: rgba(255,255,255,0.14);
+      background: rgba(255,255,255,0.08);
+    }
+
+    /* =========================
+       Compare
+    ========================== */
+    .compare {
+      background:
+        radial-gradient(circle at 72% 20%, rgba(158,190,216,0.18), transparent 30%),
+        radial-gradient(circle at 20% 80%, rgba(200,164,127,0.16), transparent 30%),
+        #080808;
+      color: #fff;
+    }
+
+    .compare p {
+      color: rgba(255,255,255,0.65);
+    }
+
+    .compare .eyebrow {
+      color: rgba(255,255,255,0.58);
+    }
+
+    .compare-table {
+      margin-top: 74px;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(255,255,255,0.04);
+      backdrop-filter: blur(20px);
+    }
+
+    .compare-row {
+      display: grid;
+      grid-template-columns: 0.8fr 1fr 1fr;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .compare-row:last-child {
+      border-bottom: 0;
+    }
+
+    .compare-cell {
+      padding: 24px 28px;
+      color: rgba(255,255,255,0.72);
+    }
+
+    .compare-cell strong {
+      color: #fff;
+      font-weight: 400;
+    }
+
+    .compare-head {
+      background: rgba(255,255,255,0.08);
+    }
+
+    /* =========================
+       Product Lineup
+    ========================== */
+    .lineup {
+      background: linear-gradient(180deg, #fff, #f4f2ec);
+    }
+
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 30px;
+      margin-top: 76px;
+    }
+
+    .product-card {
+      position: relative;
+      min-height: 720px;
+      border-radius: var(--radius-xl);
+      background:
+        radial-gradient(circle at 70% 12%, rgba(158,190,216,0.18), transparent 28%),
+        linear-gradient(180deg, #f6f4ee, #ffffff);
+      padding: 46px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      overflow: hidden;
+      border: 1px solid rgba(0,0,0,0.08);
+      box-shadow: 0 35px 100px rgba(0,0,0,0.07);
+    }
+
+    .product-card::after {
+      content: "";
+      position: absolute;
+      width: 360px;
+      height: 360px;
+      right: -120px;
+      top: -120px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(200,164,127,0.18), transparent 65%);
+    }
+
+    .product-img {
+      position: relative;
+      z-index: 2;
+      height: 370px;
+      border-radius: 32px;
+      background:
+        radial-gradient(circle at 50% 36%, #fff, #eae7df 70%);
+      overflow: hidden;
+      display: grid;
+      place-items: center;
+      margin-bottom: 36px;
+    }
+
+    .product-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      padding: 26px;
+      transition: 0.75s ease;
+    }
+
+    .product-card:hover .product-img img {
+      transform: translateY(-6px) scale(1.03);
+    }
+
+    .product-card h3,
+    .product-card p,
+    .product-card .tag-row {
+      position: relative;
+      z-index: 2;
+    }
+
+    /* =========================
+       Steps
+    ========================== */
+    .steps {
+      background: #fff;
+    }
+
+    .step-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-top: 74px;
+    }
+
+    .step-number {
+      font-size: 12px;
+      color: var(--gold);
+      letter-spacing: 0.16em;
+      margin-bottom: 18px;
+    }
+
+    /* =========================
+       Plans
+    ========================== */
+    .plans {
+      background:
+        radial-gradient(circle at 50% 0%, rgba(200,164,127,0.22), transparent 34%),
+        radial-gradient(circle at 80% 40%, rgba(158,190,216,0.14), transparent 28%),
+        var(--paper);
+    }
+
+    .plan-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 22px;
+      margin-top: 76px;
+    }
+
+    .plan-card {
+      position: relative;
+      border-radius: 34px;
+      background: rgba(255,255,255,0.78);
+      border: 1px solid rgba(0,0,0,0.08);
+      padding: 30px;
+      display: flex;
+      flex-direction: column;
+      min-height: 560px;
+      overflow: hidden;
+      box-shadow: 0 28px 80px rgba(0,0,0,0.06);
+    }
+
+    .plan-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at 80% 0%, rgba(158,190,216,0.16), transparent 32%);
+      pointer-events: none;
+    }
+
+    .plan-card.featured {
+      background:
+        radial-gradient(circle at 80% 0%, rgba(200,164,127,0.2), transparent 32%),
+        #111;
+      color: #fff;
+      border: 1px solid rgba(200,164,127,0.45);
+      box-shadow: 0 38px 110px rgba(0,0,0,0.2);
+      transform: translateY(-10px);
+    }
+
+    .plan-card.featured p,
+    .plan-card.featured .plan-list,
+    .plan-card.featured .price small {
+      color: rgba(255,255,255,0.58);
+    }
+
+    .plan-card.featured .price strong {
+      color: #fff;
+    }
+
+    .plan-label {
+      position: relative;
+      display: inline-flex;
+      align-self: flex-start;
+      padding: 7px 12px;
+      border-radius: 999px;
+      background: rgba(200,164,127,0.14);
+      color: #9c7652;
+      font-size: 12px;
+      margin-bottom: 24px;
+    }
+
+    .plan-card.featured .plan-label {
+      background: rgba(255,255,255,0.12);
+      color: var(--gold-light);
+    }
+
+    .price {
+      position: relative;
+      margin: 26px 0;
+    }
+
+    .price small {
+      color: var(--gray);
+      text-decoration: line-through;
+      display: block;
+    }
+
+    .price strong {
+      font-size: 38px;
+      font-weight: 400;
+      color: var(--black);
+      letter-spacing: -0.05em;
+    }
+
+    .plan-list {
+      position: relative;
+      list-style: none;
+      color: var(--gray);
+      font-size: 14px;
+      margin: 20px 0 30px;
+    }
+
+    .plan-list li {
+      padding: 8px 0;
+      border-bottom: 1px solid rgba(0,0,0,0.08);
+    }
+
+    .plan-card.featured .plan-list li {
+      border-bottom: 1px solid rgba(255,255,255,0.12);
+    }
+
+    .plan-card .btn {
+      margin-top: auto;
+      position: relative;
+    }
+
+    /* =========================
+       Specs / Package / Timeline / FAQ
+    ========================== */
+    .specs {
+      background: #fff;
+    }
+
+    .spec-table {
+      max-width: 980px;
+      margin: 74px auto 0;
+      border-top: 1px solid var(--line);
+    }
+
+    .spec-row {
+      display: grid;
+      grid-template-columns: 0.35fr 0.65fr;
+      gap: 24px;
+      padding: 24px 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .spec-row strong {
+      font-weight: 400;
+    }
+
+    .spec-row span {
+      color: var(--gray);
+    }
+
+    .package-grid {
+      grid-template-columns: repeat(3, 1fr);
+      margin-top: 74px;
+    }
+
+    .timeline {
+      background:
+        radial-gradient(circle at 72% 20%, rgba(158,190,216,0.18), transparent 30%),
+        #080808;
+      color: #fff;
+    }
+
+    .timeline p {
+      color: rgba(255,255,255,0.65);
+    }
+
+    .timeline .eyebrow {
+      color: rgba(255,255,255,0.58);
+    }
+
+    .timeline-list {
+      margin-top: 74px;
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 18px;
+    }
+
+    .time-item {
+      padding: 28px;
+      border-radius: 30px;
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.1);
+      backdrop-filter: blur(18px);
+    }
+
+    .time-item strong {
+      display: block;
+      color: #fff;
+      font-weight: 400;
+      margin-bottom: 10px;
+    }
+
+    .faq-grid {
+      grid-template-columns: repeat(2, 1fr);
+      margin-top: 74px;
+    }
+
+    .faq-item {
+      background: rgba(255,255,255,0.82);
+      border: 1px solid rgba(0,0,0,0.08);
+      border-radius: 30px;
+      padding: 32px;
+    }
+
+    .faq-item h3 {
+      font-size: 25px;
+      margin-bottom: 14px;
+      letter-spacing: -0.04em;
+    }
+
+    .final-cta {
+      min-height: 720px;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      background:
+        radial-gradient(circle at 50% 20%, rgba(158,190,216,0.26), transparent 36%),
+        radial-gradient(circle at 18% 80%, rgba(200,164,127,0.2), transparent 30%),
+        linear-gradient(180deg, #ffffff, #f0eee7);
+    }
+
+    footer {
+      background: #080808;
+      color: rgba(255,255,255,0.56);
+      padding: 46px 44px;
+      font-size: 13px;
+    }
+
+    .footer-inner {
+      width: min(1180px, 100%);
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    @media (max-width: 1100px) {
+      .hero-inner {
+        grid-template-columns: 1fr;
+      }
+
+      .funding-bar {
+        max-width: 640px;
+      }
+
+      .plan-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .timeline-list {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 880px) {
+      .nav {
+        top: 12px;
+        width: calc(100% - 24px);
+        padding: 0 14px 0 18px;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      .hero-fullscreen {
+        min-height: 860px;
+      }
+
+      .hero-content {
+        padding: 0 22px 64px;
+      }
+
+      .funding-meta {
+        grid-template-columns: 1fr;
+      }
+
+      .section {
+        padding: 90px 22px;
+      }
+
+      .split,
+      .scenario,
+      .scenario:nth-child(even),
+      .product-grid,
+      .pain-grid,
+      .feature-grid,
+      .step-grid,
+      .package-grid,
+      .faq-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .scenario {
+        min-height: auto;
+      }
+
+      .scenario:nth-child(even) .scenario-media {
+        order: 0;
+      }
+
+      .scenario-media {
+        min-height: 380px;
+      }
+
+      .scenario-copy {
+        padding: 42px;
+      }
+
+      .plan-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .plan-card.featured {
+        transform: none;
+      }
+
+      .compare-row {
+        grid-template-columns: 1fr;
+      }
+
+      .spec-row {
+        grid-template-columns: 1fr;
+        gap: 6px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header class="nav">
+    <a href="#" class="logo">Magic Palm</a>
+    <nav class="nav-links">
+      <a href="#pain">痛點</a>
+      <a href="#features">功能</a>
+      <a href="#scenarios">情境</a>
+      <a href="#lineup">款式</a>
+      <a href="#plans">方案</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+    <a href="#plans" class="nav-cta">支持早鳥</a>
+  </header>
+
+  <main>
+    <!-- 01 Fullscreen Hero Video -->
+    <section class="hero-fullscreen">
+      <div class="hero-video">
+        <!-- 
+          第一屏全屏影片｜MP4 版本
+          取消註解後替換：
+          REPLACE_VIDEO_URL_HERO
+          REPLACE_IMAGE_URL_HERO_POSTER
+        -->
+        <!--
+        <video autoplay muted loop playsinline poster="REPLACE_IMAGE_URL_HERO_POSTER">
+          <source src="REPLACE_VIDEO_URL_HERO" type="video/mp4" />
+        </video>
+        -->
+
+        <!-- 
+          第一屏全屏影片｜YouTube / Vimeo iframe 版本
+          取消註解後替換：
+          REPLACE_YOUTUBE_EMBED_URL_HERO
+        -->
+        <!--
+        <iframe
+          src="REPLACE_YOUTUBE_EMBED_URL_HERO"
+          title="Magic Palm Hero Video"
+          allow="autoplay; fullscreen; picture-in-picture"
+          allowfullscreen>
+        </iframe>
+        -->
+
+        <div class="hero-poster"></div>
+      </div>
+
+      <div class="hero-gradient"></div>
+
+      <div class="hero-content">
+        <div class="hero-inner">
+          <div class="hero-copy">
+            <div class="eyebrow">Audio Smart Glasses</div>
+            <h1>不用耳機，<br />聲音也能在耳邊。</h1>
+            <p class="lead">
+              Magic Palm 聲音型智慧眼鏡，把音樂、通話與語音提醒自然融入日常配戴。
+            </p>
+
+            <div class="hero-badges">
+              <span class="badge">開放聆聽</span>
+              <span class="badge">清晰通話</span>
+              <span class="badge">輕觸控制</span>
+              <span class="badge">生活 / 運動雙款</span>
+            </div>
+
+            <div class="button-row">
+              <a href="#plans" class="btn primary">立即支持早鳥優惠</a>
+              <a href="#scenarios" class="btn secondary">查看使用情境</a>
+            </div>
+          </div>
+
+          <div class="funding-bar">
+            <div class="funding-kicker">嘖嘖募資進行中</div>
+            <div class="funding-meta">
+              <div>
+                <strong>72%</strong>
+                <span>目前達標進度</span>
+              </div>
+              <div>
+                <strong>386</strong>
+                <span>已支持人數</span>
+              </div>
+              <div>
+                <strong>21 天</strong>
+                <span>募資剩餘時間</span>
+              </div>
+            </div>
+            <div class="progress">
+              <span></span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="scroll-hint">Scroll</div>
+    </section>
+
+    <!-- 02 Pain Points -->
+    <section class="section" id="pain">
+      <div class="container">
+        <div class="center">
+          <div class="eyebrow">Why Magic Palm</div>
+          <h2>你不是不想聽，<br />是不想被耳機隔開。</h2>
+          <p class="lead">
+            通勤、跑步、騎行與辦公移動中，我們需要聲音，也需要感知周圍。
+          </p>
+        </div>
+
+        <div class="pain-grid">
+          <div class="card">
+            <div class="image-card">
+              <img src="REPLACE_IMAGE_URL_PAIN_COMMUTE" alt="通勤痛點圖片" />
+            </div>
+            <h3>通勤時</h3>
+            <p>雙手抓著扶手或拿著包，不方便拿手機貼耳接電話。</p>
+          </div>
+
+          <div class="card">
+            <div class="image-card">
+              <img src="REPLACE_IMAGE_URL_PAIN_RUNNING" alt="跑步痛點圖片" />
+            </div>
+            <h3>運動時</h3>
+            <p>入耳式耳機容易隔絕車流、人聲與環境提醒。</p>
+          </div>
+
+          <div class="card">
+            <div class="image-card">
+              <img src="REPLACE_IMAGE_URL_PAIN_WORK" alt="辦公痛點圖片" />
+            </div>
+            <h3>工作時</h3>
+            <p>從座位到會議室，提醒和來電常常在移動中錯過。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 03 Product Intro -->
+    <section class="section intro">
+      <div class="container split">
+        <div>
+          <div class="eyebrow">What It Is</div>
+          <h2>Magic Palm 是一副會發聲的智慧眼鏡。</h2>
+          <p class="lead">
+            透過眼鏡鏡腳傳遞聲音，讓你不用戴耳機，也能聽音樂、接電話、收語音提醒。
+            雙耳保持開放，與環境保持連結。
+          </p>
+        </div>
+
+        <div class="visual-box">
+          <img src="REPLACE_IMAGE_URL_PRODUCT_SIDE_DETAIL" alt="鏡腳與耳邊細節圖片" />
+        </div>
+      </div>
+    </section>
+
+    <!-- 04 Features -->
+    <section class="section" id="features">
+      <div class="container">
+        <div class="center">
+          <div class="eyebrow">Core Features</div>
+          <h2>把聲音，放進你每天都會戴的眼鏡裡。</h2>
+        </div>
+
+        <div class="feature-grid">
+          <div class="card feature-card">
+            <div>
+              <div class="icon">♪</div>
+              <h3>開放聆聽</h3>
+              <p>不用入耳、不封閉，聽音樂與導航時，依然能感知車流、人聲與周圍環境。</p>
+            </div>
+            <div class="tag-row">
+              <span class="tag">跑步</span>
+              <span class="tag">騎行</span>
+              <span class="tag">通勤</span>
+            </div>
+          </div>
+
+          <div class="card feature-card">
+            <div>
+              <div class="icon">☎</div>
+              <h3>清晰通話</h3>
+              <p>在人擠人的捷運、走路或辦公移動中，輕觸眼鏡即可接聽重要來電。</p>
+            </div>
+            <div class="tag-row">
+              <span class="tag">接電話</span>
+              <span class="tag">語音訊息</span>
+            </div>
+          </div>
+
+          <div class="card feature-card">
+            <div>
+              <div class="icon">•</div>
+              <h3>輕觸控制</h3>
+              <p>播放音樂、接聽電話、啟動語音功能，都能透過鏡腳快速完成。</p>
+            </div>
+            <div class="tag-row">
+              <span class="tag">播放 / 暫停</span>
+              <span class="tag">接聽 / 掛斷</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 05 Scenarios -->
+    <section class="section" id="scenarios">
+      <div class="container">
+        <div class="center">
+          <div class="eyebrow">Scenarios</div>
+          <h2>每一種日常，<br />都有聲音跟上。</h2>
+        </div>
+
+        <div class="scenario-list">
+          <article class="scenario">
+            <div class="scenario-media">
+              <img src="REPLACE_IMAGE_URL_SCENARIO_SUBWAY" alt="捷運通勤接電話情境" />
+            </div>
+            <div class="scenario-copy">
+              <h3>人潮之中，通話自然接上。</h3>
+              <p>
+                雙手抓著扶手、背著包、站在人擠人的車廂裡，不用拿出手機，也能輕鬆接聽重要來電。
+              </p>
+              <div class="tag-row">
+                <span class="tag">清晰通話</span>
+                <span class="tag">輕觸控制</span>
+                <span class="tag">開放聆聽</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="scenario">
+            <div class="scenario-media">
+              <img src="REPLACE_IMAGE_URL_SCENARIO_RUNNING" alt="跑步訓練情境" />
+            </div>
+            <div class="scenario-copy">
+              <h3>專注向前，節奏在耳邊。</h3>
+              <p>
+                跑步時不必低頭查看手機，配速提醒、音樂與來電通知自然跟上。
+              </p>
+              <div class="tag-row">
+                <span class="tag">穩定配戴</span>
+                <span class="tag">開放聆聽</span>
+                <span class="tag">日常防水</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="scenario">
+            <div class="scenario-media">
+              <img src="REPLACE_IMAGE_URL_SCENARIO_CYCLING" alt="城市騎行情境" />
+            </div>
+            <div class="scenario-copy">
+              <h3>眼前是路，耳邊是方向。</h3>
+              <p>
+                騎行時保持對車流的感知，導航與語音提醒仍能清楚抵達。
+              </p>
+              <div class="tag-row">
+                <span class="tag">導航提醒</span>
+                <span class="tag">開放聆聽</span>
+                <span class="tag">穩定連線</span>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- 06 Compare -->
+    <section class="section compare">
+      <div class="container">
+        <div class="center">
+          <div class="eyebrow">Compare</div>
+          <h2>比耳機更自然，<br />比普通眼鏡更聰明。</h2>
+          <p class="lead">
+            Magic Palm 不是要取代你的所有裝置，而是讓日常最常用的聲音體驗更自然。
+          </p>
+        </div>
+
+        <div class="compare-table">
+          <div class="compare-row compare-head">
+            <div class="compare-cell"><strong>使用情境</strong></div>
+            <div class="compare-cell"><strong>入耳式耳機</strong></div>
+            <div class="compare-cell"><strong>Magic Palm</strong></div>
+          </div>
+
+          <div class="compare-row">
+            <div class="compare-cell">環境感知</div>
+            <div class="compare-cell">容易隔絕周圍聲音</div>
+            <div class="compare-cell">雙耳保持開放</div>
+          </div>
+
+          <div class="compare-row">
+            <div class="compare-cell">通勤接電話</div>
+            <div class="compare-cell">需配戴耳機或拿手機</div>
+            <div class="compare-cell">眼鏡輕觸接聽</div>
+          </div>
+
+          <div class="compare-row">
+            <div class="compare-cell">跑步騎行</div>
+            <div class="compare-cell">可能影響安全感知</div>
+            <div class="compare-cell">聽見提醒也聽見環境</div>
+          </div>
+
+          <div class="compare-row">
+            <div class="compare-cell">長時間配戴</div>
+            <div class="compare-cell">耳朵容易疲勞</div>
+            <div class="compare-cell">像眼鏡一樣自然配戴</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 07 Product Lineup -->
+    <section class="section lineup" id="lineup">
+      <div class="container">
+        <div class="center">
+          <div class="eyebrow">Lineup</div>
+          <h2>兩種款式，<br />對應你的不同日常。</h2>
+        </div>
+
+        <div class="product-grid">
+          <div class="product-card">
+            <div>
+              <div class="product-img">
+                <img src="REPLACE_IMAGE_URL_PRODUCT_LIFESTYLE" alt="Magic Palm 生活通勤款" />
+              </div>
+              <h3>生活通勤款</h3>
+              <p>
+                黑色圓框光學鏡架、淡藍色防藍光鏡片、金屬鉸鏈細節與黑色智慧鏡腳。
+              </p>
+            </div>
+            <div class="tag-row">
+              <span class="tag">捷運通勤</span>
+              <span class="tag">辦公會議</span>
+              <span class="tag">咖啡廳</span>
+              <span class="tag">日常外出</span>
+            </div>
+          </div>
+
+          <div class="product-card">
+            <div>
+              <div class="product-img">
+                <img src="REPLACE_IMAGE_URL_PRODUCT_SPORT" alt="Magic Palm 運動款" />
+              </div>
+              <h3>運動款</h3>
+              <p>
+                黑色包覆式運動鏡框、一體式深灰盾型鏡片與寬版智慧鏡腳。
+              </p>
+            </div>
+            <div class="tag-row">
+              <span class="tag">跑步</span>
+              <span class="tag">騎行</span>
+              <span class="tag">健行</span>
+              <span class="tag">三鐵訓練</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 08 Detail -->
+    <section class="section">
+      <div class="container split">
+        <div class="visual-box dark">
+          <img src="REPLACE_IMAGE_URL_DETAIL_TEMPLE" alt="智慧鏡腳產品細節" />
+        </div>
+
+        <div>
+          <div class="eyebrow">Product Details</div>
+          <h2>看起來像眼鏡，<br />細節裡藏著智慧。</h2>
+          <p class="lead">
+            音訊、通話與控制模組整合於鏡腳之中。透過輕觸或按鍵操作，
+            讓播放、接聽與語音提醒都變得直覺。
+          </p>
+
+          <div class="tag-row">
+            <span class="tag">智慧鏡腳</span>
+            <span class="tag">實體按鍵</span>
+            <span class="tag">輕量鏡框</span>
+            <span class="tag">防滑鼻墊</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 09 Steps -->
+    <section class="section steps">
+      <div class="container">
+        <div class="center">
+          <div class="eyebrow">How It Works</div>
+          <h2>三步驟，開始你的聲音眼鏡生活。</h2>
+        </div>
+
+        <div class="step-grid">
+          <div class="card">
+            <div class="step-number">STEP 01</div>
+            <h3>戴上 Magic Palm</h3>
+            <p>像日常眼鏡一樣自然配戴，不需要額外拿出耳機。</p>
+          </div>
+
+          <div class="card">
+            <div class="step-number">STEP 02</div>
+            <h3>連接手機藍牙</h3>
+            <p>與手機保持連結，讓音樂、通話與提醒自然接上。</p>
+          </div>
+
+          <div class="card">
+            <div class="step-number">STEP 03</div>
+            <h3>輕觸鏡腳操作</h3>
+            <p>播放、暫停、接聽電話與語音功能，都能快速完成。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 10 Plans -->
+    <section class="section plans" id="plans">
+      <div class="container">
+        <div class="center">
+          <div class="eyebrow">Backing Plans</div>
+          <h2>募資限定方案</h2>
+          <p class="lead">
+            早鳥數量有限，售完即恢復下一階段價格。
+          </p>
+        </div>
+
+        <div class="plan-grid">
+          <div class="plan-card featured">
+            <span class="plan-label">超早鳥｜限量 100 組</span>
+            <h3>生活通勤款單入組</h3>
+            <div class="price">
+              <small>未來售價 NT$ 15,600</small>
+              <strong>NT$ 9,980</strong>
+            </div>
+            <ul class="plan-list">
+              <li>Magic Palm 生活通勤款 x 1</li>
+              <li>收納盒 x 1</li>
+              <li>充電線 x 1</li>
+              <li>拭鏡布 x 1</li>
+              <li>預計出貨：2026 年 12 月</li>
+            </ul>
+            <a href="#" class="btn primary">支持這個方案</a>
+          </div>
+
+          <div class="plan-card">
+            <span class="plan-label">運動早鳥</span>
+            <h3>運動款單入組</h3>
+            <div class="price">
+              <small>未來售價 NT$ 15,600</small>
+              <strong>NT$ 10,280</strong>
+            </div>
+            <ul class="plan-list">
+              <li>Magic Palm 運動款 x 1</li>
+              <li>運動收納盒 x 1</li>
+              <li>充電線 x 1</li>
+              <li>拭鏡布 x 1</li>
+              <li>預計出貨：2026 年 12 月</li>
+            </ul>
+            <a href="#" class="btn dark">支持這個方案</a>
+          </div>
+
+          <div class="plan-card">
+            <span class="plan-label">雙款組合</span>
+            <h3>一副日常，一副運動</h3>
+            <div class="price">
+              <small>未來售價 NT$ 31,200</small>
+              <strong>NT$ 18,880</strong>
+            </div>
+            <ul class="plan-list">
+              <li>生活通勤款 x 1</li>
+              <li>運動款 x 1</li>
+              <li>收納盒 x 2</li>
+              <li>充電線 x 2</li>
+              <li>預計出貨：2026 年 12 月</li>
+            </ul>
+            <a href="#" class="btn dark">支持這個方案</a>
+          </div>
+
+          <div class="plan-card">
+            <span class="plan-label">雙人分享組</span>
+            <h3>任選兩副</h3>
+            <div class="price">
+              <small>未來售價 NT$ 31,200</small>
+              <strong>NT$ 19,280</strong>
+            </div>
+            <ul class="plan-list">
+              <li>Magic Palm 任選兩副</li>
+              <li>收納盒 x 2</li>
+              <li>充電線 x 2</li>
+              <li>拭鏡布 x 2</li>
+              <li>預計出貨：2026 年 12 月</li>
+            </ul>
+            <a href="#" class="btn dark">支持這個方案</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 11 Specs -->
+    <section class="section specs">
+      <div class="container">
+        <div class="center">
+          <div class="eyebrow">Specifications</div>
+          <h2>產品規格</h2>
+        </div>
+
+        <div class="spec-table">
+          <div class="spec-row">
+            <strong>產品名稱</strong>
+            <span>Magic Palm Audio Smart Glasses</span>
+          </div>
+          <div class="spec-row">
+            <strong>款式</strong>
+            <span>生活通勤款 / 運動款</span>
+          </div>
+          <div class="spec-row">
+            <strong>音訊</strong>
+            <span>開放式音訊</span>
+          </div>
+          <div class="spec-row">
+            <strong>通話</strong>
+            <span>支援通話</span>
+          </div>
+          <div class="spec-row">
+            <strong>控制</strong>
+            <span>實體按鍵 / 輕觸控制</span>
+          </div>
+          <div class="spec-row">
+            <strong>連線</strong>
+            <span>Bluetooth</span>
+          </div>
+          <div class="spec-row">
+            <strong>鏡片</strong>
+            <span>抗藍光 / 太陽鏡片 / 運動鏡片 / 變色鏡片</span>
+          </div>
+          <div class="spec-row">
+            <strong>防護</strong>
+            <span>日常防水</span>
+          </div>
+          <div class="spec-row">
+            <strong>適用系統</strong>
+            <span>iOS / Android</span>
+          </div>
+          <div class="spec-row">
+            <strong>內容物</strong>
+            <span>眼鏡、收納盒、充電線、拭鏡布、說明書</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 12 Package -->
+    <section class="section">
+      <div class="container">
+        <div class="center">
+          <div class="eyebrow">Package</div>
+          <h2>包裝內容</h2>
+        </div>
+
+        <div class="package-grid">
+          <div class="card">
+            <div class="image-card">
+              <img src="REPLACE_IMAGE_URL_PACKAGE_GLASSES" alt="Magic Palm 智慧眼鏡" />
+            </div>
+            <h3>Magic Palm 智慧眼鏡</h3>
+            <p>依照所選方案出貨生活通勤款或運動款。</p>
+          </div>
+
+          <div class="card">
+            <div class="image-card">
+              <img src="REPLACE_IMAGE_URL_PACKAGE_CASE" alt="專用收納盒" />
+            </div>
+            <h3>專用收納盒</h3>
+            <p>方便日常外出與通勤攜帶。</p>
+          </div>
+
+          <div class="card">
+            <div class="image-card">
+              <img src="REPLACE_IMAGE_URL_PACKAGE_ACCESSORIES" alt="充電線與配件" />
+            </div>
+            <h3>充電線與配件</h3>
+            <p>包含充電線、拭鏡布、快速使用指南與保固卡。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 13 Timeline -->
+    <section class="section timeline">
+      <div class="container">
+        <div class="center">
+          <div class="eyebrow">Timeline</div>
+          <h2>專案時程</h2>
+          <p class="lead">以下時程為初步規劃，實際進度將依量產與物流狀況更新。</p>
+        </div>
+
+        <div class="timeline-list">
+          <div class="time-item">
+            <strong>2026.08</strong>
+            <p>嘖嘖募資開始</p>
+          </div>
+          <div class="time-item">
+            <strong>2026.09</strong>
+            <p>募資結束</p>
+          </div>
+          <div class="time-item">
+            <strong>2026.10</strong>
+            <p>量產準備</p>
+          </div>
+          <div class="time-item">
+            <strong>2026.11</strong>
+            <p>品質檢測</p>
+          </div>
+          <div class="time-item">
+            <strong>2026.12</strong>
+            <p>開始出貨</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 14 FAQ -->
+    <section class="section" id="faq">
+      <div class="container">
+        <div class="center">
+          <div class="eyebrow">FAQ</div>
+          <h2>常見問題</h2>
+        </div>
+
+        <div class="faq-grid">
+          <div class="faq-item">
+            <h3>Magic Palm 是 AR 眼鏡嗎？</h3>
+            <p>不是。Magic Palm 是聲音型智慧眼鏡，不顯示 AR 畫面，也沒有鏡片投影。</p>
+          </div>
+
+          <div class="faq-item">
+            <h3>需要戴耳機嗎？</h3>
+            <p>不需要。聲音透過眼鏡鏡腳傳遞，雙耳保持開放。</p>
+          </div>
+
+          <div class="faq-item">
+            <h3>可以接電話嗎？</h3>
+            <p>可以。Magic Palm 支援通話功能，可透過鏡腳操作接聽。</p>
+          </div>
+
+          <div class="faq-item">
+            <h3>會不會聽不到環境聲？</h3>
+            <p>Magic Palm 採開放式聆聽設計，讓你在聽內容的同時，仍保有環境感知。</p>
+          </div>
+
+          <div class="faq-item">
+            <h3>適合跑步或騎車嗎？</h3>
+            <p>運動款適合跑步、騎行與戶外訓練使用，具備穩定配戴與日常防水特性。</p>
+          </div>
+
+          <div class="faq-item">
+            <h3>什麼時候出貨？</h3>
+            <p>預計於 2026 年 12 月開始依訂單順序出貨。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 15 Final CTA -->
+    <section class="final-cta">
+      <div class="container center">
+        <div class="eyebrow">Support Now</div>
+        <h2>讓聲音，<br />不再需要耳機。</h2>
+        <p class="lead">
+          現在支持 Magic Palm，以募資限定優惠入手聲音型智慧眼鏡。
+        </p>
+        <div class="button-row centered">
+          <a href="#plans" class="btn dark">立即支持早鳥方案</a>
+          <a href="#features" class="btn light-secondary">再次了解功能</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+      <div>© 2026 Magic Palm. All rights reserved.</div>
+      <div>Audio Smart Glasses｜聲音型智慧眼鏡募資計畫</div>
+    </div>
+  </footer>
+</body>
+</html>
